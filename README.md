@@ -1,2 +1,2 @@
 # gambling-game
-Gambling game with virtual currency and dice guessing.
+<b>Uses virtual currency ☑Random Number Generation .☑Repeats the program until you run out of currency☑</b>
