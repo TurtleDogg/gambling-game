@@ -1,0 +1,94 @@
+﻿#include <iostream>
+#include <string>
+#include <algorithm>
+
+int dogeCoins = 0;
+std::string cont = "yes";
+
+int virtualCurrency(){
+    std::cout << "You have " << dogeCoins << " Dogecoins." << std::endl;
+    return dogeCoins;
+}
+
+void gamblingGame(){
+    std::string dice;
+    int guess = 0;
+    std::cout << "It costs 100 Dogecoins to play" << std::endl;
+    std::cout << "You have to guess the number on the dice. Choose a dice, d6 or d20" << std::endl;
+    std::cin >> dice;
+    std::transform(dice.begin(), dice.end(), dice.begin(), ::tolower);
+    if (dice == "d6"){
+        srand(time(NULL));
+        int numberRandom = std::rand() % 5;
+        numberRandom++;
+        std::cout << "What is your guess?" << std::endl;
+        std::cin >> guess;
+        if (guess == numberRandom){
+            dogeCoins -= 100;
+            std::cout << "Correct. You won 200 Dogecoins." << std::endl;
+            std::cout << numberRandom << std::endl;
+            dogeCoins += 200;
+            }
+        else if(guess != numberRandom && guess <= 5 && guess >= 0){
+            dogeCoins -= 100;
+            std::cout << "Unlucky, it was " << numberRandom << " ." << std::endl;
+            }
+    }
+
+    else if(dice == "d20"){
+            srand(time(NULL));
+        int numberRandom = std::rand() % 19;
+        numberRandom++;
+        std::cout << "What is your guess?" << std::endl;
+        std::cin >> guess;
+        if (guess == numberRandom){
+            dogeCoins -= 100;
+            std::cout << "Correct. You won 500 Dogecoins." << std::endl;
+            std::cout << numberRandom << std::endl;
+            dogeCoins += 500;
+        }
+        else if(guess != numberRandom && guess <= 20 && guess >= 0) {
+            std::cout << "Unlucky, it was " << numberRandom << " ." << std::endl;
+        }
+    }
+    else if (dice != "d6" || dice != "d20"){
+        std::cout << "Wrong Input" << std::endl;
+    }
+    
+        if (guess > 5 && guess < 0){
+            std::cout << "Guess must be between 1 and 5" << std::endl;
+            std::cout << "Do you want to try again?" << std::endl;
+            std::cin >> cont;
+            std::transform(cont.begin(), cont.end(), cont.begin(), ::tolower);
+        }
+        else if (guess > 20 && guess < 0){
+            std::cout << "Guess must be between 1 and 20" << std::endl;
+            std::cout << "Do you want to try again?" << std::endl;
+            std::cin >> cont;
+            std::transform(cont.begin(), cont.end(), cont.begin(), ::tolower);
+        }
+    std::cout << "Do you want to play again?" << std::endl;
+    std::cin >> cont;
+    std::transform(cont.begin(), cont.end(), cont.begin(), ::tolower);
+}
+
+int main()
+{
+    std::cout << "Welcome to the Gambling Game" << std::endl;
+    std::cout << "You get 500 Dogecoins to start" << std::endl;
+    dogeCoins += 500;
+    while (cont == "yes"){
+        virtualCurrency();
+        if (dogeCoins >= 20){
+            gamblingGame();
+        }
+        else{
+            std::cout << "Not enough money to play. Goodbye" << std::endl;
+        }
+    }
+    if (cont != "yes"){
+        std::cout << "Come back again. Goodbye." << std::endl;
+        quick_exit(EXIT_SUCCESS);
+    }
+    
+}
