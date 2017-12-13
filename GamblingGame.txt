@@ -49,6 +49,7 @@ void gamblingGame(){
         }
         else if(guess != numberRandom && guess <= 20 && guess >= 0) {
             std::cout << "Unlucky, it was " << numberRandom << " ." << std::endl;
+            dogeCoins -= 100;
         }
     }
     else if (dice != "d6" || dice != "d20"){
